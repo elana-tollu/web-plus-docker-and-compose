@@ -1,0 +1,13 @@
+version: "3.1"
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: kpd
+      POSTGRES_USER: kpd_user
+      POSTGRES_PASSWORD: kpd_password
+    
