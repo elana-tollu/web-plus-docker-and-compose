@@ -1,8 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-export const JWT_SECRET = 'hard!to-guess_secret';
-
 @Injectable()
 export class AuthJwtService {
   private readonly logger = new Logger(AuthJwtService.name);

@@ -17,13 +17,14 @@ import { WishEntity } from './wishes/entities/wish';
 import { WishlistEntity } from './wishlistlists/entities/wishlist';
 import { OfferEntity } from './offers/entities/offer';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthJwtService, JWT_SECRET } from './jwt/authJwt.service';
+import { AuthJwtService } from './jwt/authJwt.service';
 import { LocalStrategy } from './auth/local.strategy';
 import { JwtStrategy } from './jwt/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule.forRoot()],
       useFactory: (config: ConfigService) => ({
@@ -44,7 +45,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       WishlistEntity,
       OfferEntity,
     ]),
-    JwtModule.register({ secret: JWT_SECRET }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+      }),
+      inject: [ConfigService],
+    }),
   ],
   controllers: [
     AppController,
