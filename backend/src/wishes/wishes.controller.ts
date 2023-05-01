@@ -12,7 +12,7 @@ import {
 
 import { CreateWishDto } from './dto/createWishDto';
 import { UpdateWishDto } from './dto/updateWishDto';
-import { WishDto } from './dto/WishDto';
+import { WishDto } from './dto/wishDto';
 import { ShallowWishDto } from './dto/shallowWishDto';
 import { WishesService } from './wishes.service';
 import { UserId } from 'src/userId.decorator';

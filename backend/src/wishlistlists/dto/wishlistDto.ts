@@ -1,5 +1,5 @@
 import { UserPublicProfileResponseDto } from 'src/users/dto/userPublicProfileResponseDto';
-import { WishPartialDto } from 'src/wishes/dto/WishPartialDto';
+import { WishPartialDto } from 'src/wishes/dto/wishPartialDto';
 import { WishlistEntity } from '../entities/wishlist';
 
 export class WishlistDto {
