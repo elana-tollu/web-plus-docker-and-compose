@@ -1,5 +1,8 @@
 version: "3.1"
 
+volumes:
+  kpd_data:
+  
 services:
   db:
     image: postgres
@@ -10,4 +13,8 @@ services:
       POSTGRES_DB: kpd
       POSTGRES_USER: kpd_user
       POSTGRES_PASSWORD: kpd_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes: 
+      - kpd_data:/var/lib/postgresql/data
+    
     
