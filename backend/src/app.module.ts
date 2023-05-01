@@ -20,18 +20,23 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthJwtService, JWT_SECRET } from './jwt/authJwt.service';
 import { LocalStrategy } from './auth/local.strategy';
 import { JwtStrategy } from './jwt/jwt.strategy';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'kpd_user',
-      password: 'kpd_password',
-      database: 'kpd',
-      entities: [UserEntity, WishEntity, WishlistEntity, OfferEntity],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule.forRoot()],
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.get('POSTGRES_HOST'),
+        port: config.get('POSTGRES_PORT', 5432),
+        username: config.get('POSTGRES_USER'),
+        password: config.get('POSTGRES_PASSWORD'),
+        database: config.get('POSTGRES_DB'),
+        entities: [UserEntity, WishEntity, WishlistEntity, OfferEntity],
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([
       UserEntity,
