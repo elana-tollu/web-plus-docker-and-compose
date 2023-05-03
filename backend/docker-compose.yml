@@ -16,5 +16,18 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes: 
       - kpd_data:/var/lib/postgresql/data
+
+  backend:
+    image: "elanatollu/kpd-api:1"
+    build: .
+    ports: 
+      - "4000:3000"
+    restart: unless-stopped
+    depends_on:
+      - "db"
+    links:
+      - "db"
+    env_file: .env
+
     
     
