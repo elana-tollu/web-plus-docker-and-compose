@@ -9,11 +9,7 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
-    environment:
-      POSTGRES_DB: kpd
-      POSTGRES_USER: kpd_user
-      POSTGRES_PASSWORD: kpd_password
-      PGDATA: /var/lib/postgresql/data/pgdata
+    env_file: ./backend/.env
     volumes: 
       - kpd_data:/var/lib/postgresql/data
 
