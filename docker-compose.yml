@@ -8,7 +8,7 @@ services:
     image: postgres
     ports:
       - "5432:5432"
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_DB: kpd
       POSTGRES_USER: kpd_user
@@ -19,7 +19,7 @@ services:
 
   backend:
     image: "elanatollu/kpd-api:1"
-    build: .
+    build: ./backend
     ports: 
       - "4000:3000"
     restart: unless-stopped
@@ -27,7 +27,7 @@ services:
       - "db"
     links:
       - "db"
-    env_file: .env
+    env_file: ./backend/env
 
     
     
