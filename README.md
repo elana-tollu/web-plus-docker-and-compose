@@ -17,3 +17,5 @@
 
 Для предоставления публичного доступа и безопасного соединения используется Nginx.
 
+Образы компонентов приложения опубликованы на DockerHub:
+[https://hub.docker.com/repositories/elanatollu](https://hub.docker.com/repositories/elanatollu)
