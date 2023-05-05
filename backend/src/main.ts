@@ -6,11 +6,7 @@ import { ForbiddenExceptionFilter } from './filters/forbiddenException.filter';
 import { BusinessRuleViolationExceptionFilter } from './filters/businessRuleViolationException.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    cors: {
-      origin: 'http://localhost:3001',
-    },
-  });
+  const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
   app.useGlobalFilters(
