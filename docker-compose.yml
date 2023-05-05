@@ -27,7 +27,16 @@ services:
       - "db"
     links:
       - "db"
-    env_file: ./backend/env
+    env_file: ./backend/.env
+
+  frontend:
+    image: "elanatollu/kpd-frontend:1"
+    build: ./frontend
+    ports: 
+      - "8081:80"
+    restart: unless-stopped
+    depends_on:
+      - "backend"
 
     
     
